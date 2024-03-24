@@ -12,25 +12,67 @@
     crossorigin="anonymous">
 
     <style>
-      [class*="col"] {
+       [class*="col"] {
         padding: 1rem;
-        background-color: #33b5e5;
+        background-color: #6dc5e5;
         border: 2px solid #fff;
         color: #fff;
-    
-      }
+        
+      } 
 
-
+      
     </style>
 </head>
 
-<body>
+<div class="container-md border mt-5">
+    <div class="row text-center">
+      <div class="col">
 
-    <div class="container-md border"> content
+        <!--I need to write a function that divides the valuenow by the valuemax, then multiples by 100 to get the percentage -->
+        <!--Then this is now fed to the width-->
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+       <p>0 W</p>
+       <p>Grid</p>
+      
+      </div>
+
+      <div class="col">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 26.6666%" aria-valuenow="400" aria-valuemin="0" aria-valuemax="1500"></div>
+          </div>
+
+        <p>400 W</p>
+        <p>Solar PV</p>
+      </div>
+
+
+
+      <div class="col">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        <p>1440 W</p>
+        <p>Load 40%</p>
+      </div>
+      <div class="col">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+        <p>234 W</p> 
+        <p>Battery 60%<p>
+            
+
+      </div>
     </div>
+  </div>
 
 
-    <div class="container-md border">
+
+
+    <div class="container-md border  mt-5">
 
     <div class="row text-center">
         <div class="col">
@@ -79,6 +121,13 @@
 
 
 </div>
+
+
+<div class="container-md border mt-5 "> 
+    <p> My current setup is 2.2kW Solar, 24v 3kW inverter, 4kWh Lithium Battery</p>
+</div>
+
+
 
 
     <!--Added Popper--> 
