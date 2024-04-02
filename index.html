@@ -31,6 +31,23 @@
           gap: 1rem;
         }
       }
+
+      /* .pb1 {
+        background-color: #ff0000; Red color
+       /* } */
+/* 
+      .pb2 {
+        background-color: #00ff00; /* Green color */
+        /* } */ 
+
+      /* .pb3 {
+        background-color: #0000ff; /* Blue color */
+       /* } */ 
+
+      /* .pb4 { */
+        /* ?background-color: #ffff00; Yellow color */
+       /* } */ 
+
       
     </style>
 
@@ -42,18 +59,15 @@
 
         <!--I need to write a function that divides the valuenow by the valuemax, then multiples by 100 to get the percentage -->
         <!--Then this is now fed to the width for all progress bar-->
-        <div class="progress">
-            <div class="progress-bar pb1" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="1200"></div>
-          </div>
+        <progress class="pb1" max="1200" value="0"></progress>
+
        <p class="value">0 W</p>
        <p>Grid</p>
        <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/grid.png?raw=true" class="img-fluid max-img" >
       </div>
 
       <div class="col">
-        <div class="progress">
-            <div class="progress-bar pb2 bg-warning" role="progressbar" style="width: 26.6666%;" aria-valuenow="400" aria-valuemin="0" aria-valuemax="1500"></div>
-          </div>
+        <progress class="pb2" max="1400" value="0"></progress>
 
         <p class="value">400 W</p>
         <p>Solar PV</p>
@@ -64,9 +78,7 @@
       </div>
 
       <div class="col">
-        <div class="progress">
-            <div class="progress-bar pb3" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="3000"></div>
-          </div>
+        <progress class="pb3" max="3000" value="0"></progress>
         <p class="value">1440 W</p>
         <p id="load">Load 40%</p>
         <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/inverter.png?raw=true" class="img-fluid max-img" >
@@ -75,9 +87,7 @@
       <div class="col">
 
         <!--I need to write a function that checks if it's charging or discharging, then use green or red-->
-        <div class="progress">
-            <div class="progress-bar pb4 bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="1300"></div>
-          </div>
+        <progress class="pb4" max="1200" value="0"></progress>
 
         <p class="value">234 W</p> 
         <p class="value">Battery 60%<p>
@@ -97,7 +107,7 @@
     <div class="row text-center App_layout">
         <div class="col">
             <p>Electricity Used</p>
-            <p class="value"><strong>20kWh</strong></p>
+            <p class="value"><strong>N/A</strong></p>
         </div>
         <div class="col"> 
             <p>Solar Generation</p>
