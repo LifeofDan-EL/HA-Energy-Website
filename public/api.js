@@ -35,7 +35,7 @@ function transformResponse(response){
           // values[1].innerHTML = `${data[57].state}W` No grid yet
     solarPV : data[57].state,
     inverterLoad : data[55].state,
-    batteryCurrent: data[181].state,
+    batteryPower: data[181].state,
     batterySOC: data[180].state,
 
     // values[5].innerHTML = `${data[57].state} W` No eletrcicity used
