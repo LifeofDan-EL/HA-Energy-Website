@@ -67,9 +67,9 @@
       </div>
 
       <div class="col">
-        <progress class="pb2" max="1400" value="0"></progress>
+        <progress class="pb2" max="1400" value="<%= solarPV %>"></progress>
 
-        <p class="value">400 W</p>
+        <p> <%= solarPV %>W </p>
         <p>Solar PV</p>
 
             <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/panels.png?raw=true" class="img-fluid max-img" >
@@ -78,23 +78,22 @@
       </div>
 
       <div class="col">
-        <progress class="pb3" max="3000" value="0"></progress>
-        <p class="value">1440 W</p>
-        <p id="load">Load 40%</p>
+        <progress class="pb3" max="3000" value="<%= inverterLoad %>"></progress>
+        <p> <%= inverterLoad %>W </p>
+          <p> Load <%= inverterLoadPercentage %>% </p>
         <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/inverter.png?raw=true" class="img-fluid max-img" >
       </div>
 
       <div class="col">
 
         <!--I need to write a function that checks if it's charging or discharging, then use green or red-->
-        <progress class="pb4" max="1200" value="0"></progress>
+        <progress class="pb4" max="1200" value="<%= batteryCurrent %>" style="background-color: pink;"></progress>
 
-        <p class="value">234 W</p> 
-        <p class="value">Battery 60%<p>
+        <p><%= batteryCurrent %>A</p> 
+        <p>Battery <%= batterySOC %>%<p>
 
           <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/battery.png?raw=true" class="img-fluid max-img" >
             
-
       </div>
     </div>
   </div>
@@ -107,25 +106,25 @@
     <div class="row text-center App_layout">
         <div class="col">
             <p>Electricity Used</p>
-            <p class="value"><strong>N/A</strong></p>
+            <p>N/A</p>
         </div>
         <div class="col"> 
             <p>Solar Generation</p>
-            <p class="value"><strong>20kWh</strong></p>
+            <p><%= solarGeneration %>kWh</p>
         </div>
         <div class="col">
           <p>Total Solar Generated</p>
-          <p class="value"><strong>5kWh</strong></p>
+          <p><%= totalSolarGeneration %>kWh</p>
       </div>
 
       <div class="col">
         <p>Peak Solar</p>
-        <p class="value"><strong>1230W</strong></p>
+        <p><%= peakSolar %>W</p>
         </div>
 
         <div class="col">
           <p>Peak Load</p>
-          <p class="value"><strong>900W</strong></p>
+          <p><%= peakLoad %>W</p>
       </div>
         
      <div class="container-md border">
@@ -133,25 +132,25 @@
 
       <div class="col"> 
         <p>Battery Current</p>
-        <p class="value"><strong>20A</strong></p>
+        <p><%= batteryCurrent %>A</p>
     </div>
 
     <div class="col"> 
       <p>Battery Volts</p>
-      <p class="value"><strong>24V</strong></p>
+      <p><%= batteryVolts %>V</p>
   </div>
     <div class="col"> 
       <p>Battery Energy</p>
-      <p class="value"><strong>124ah</strong></p>
+      <p><%= batteryEnergy %>ah</p>
       </div>
       <div class="col"> 
         <p>Battery Discharge </p>
-        <p class="value"><strong>-4.4kWh</strong></p>
+        <p><%= batteryDischarge %>kWh</p>
     </div>
 
     <div class="col">
         <p>Battery Charge</p>
-        <p class="value"><strong>5kWh</strong></p>
+        <p><%= batteryCharge %>kWh</p>
     </div>
 
         </div>
@@ -179,7 +178,8 @@
     crossorigin="anonymous"
     ></script>
 
-    <script src="script.js"></script>
+    <!-- // <script src="script.js"></script> -->
+
 
 </body>
 </html>
