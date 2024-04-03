@@ -16,8 +16,13 @@ async function fetchdata(){
           }
         })
         .then(response => {
-            console.log(response)
-           return  transformResponse(response)})
+         console.log(response)
+         const data = transformResponse(response)
+         for (const[key, value] of Object.entries(data)){
+            data[key] = getValueOrZero(value)
+         }
+         return data
+        })
         
         .catch(error => {
           console.error('Axios error:', error);
@@ -38,8 +43,7 @@ function transformResponse(response){
     totalSolarGeneration: data[70].state,
     peakSolar: data[13].state,
     peakLoad: data[14].state,
-    // batteryCurrent: data[179].state,
-    batteryCurrent: 400,
+    batteryCurrent: data[179].state,
     batteryVolts: data[178].state,
     batteryEnergy: data[184].state,
     batteryDischarge: data[32].state,
@@ -49,6 +53,9 @@ function transformResponse(response){
     }
 }
 
+function getValueOrZero (value){
+    return  !isNaN(value) ? value : 0
+}
 
 module.exports = {
     fetchdata

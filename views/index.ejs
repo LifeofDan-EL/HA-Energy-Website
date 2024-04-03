@@ -63,7 +63,7 @@
 
        <p class="value">0 W</p>
        <p>Grid</p>
-       <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/grid.png?raw=true" class="img-fluid max-img" >
+       <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/public/Images/grid.png?raw=true" class="img-fluid max-img" >
       </div>
 
       <div class="col">
@@ -72,7 +72,7 @@
         <p> <%= solarPV %>W </p>
         <p>Solar PV</p>
 
-            <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/panels.png?raw=true" class="img-fluid max-img" >
+            <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/public/Images/panels.png?raw=true" class="img-fluid max-img" >
           
   
       </div>
@@ -81,18 +81,18 @@
         <progress class="pb3" max="3000" value="<%= inverterLoad %>"></progress>
         <p> <%= inverterLoad %>W </p>
           <p> Load <%= inverterLoadPercentage %>% </p>
-        <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/inverter.png?raw=true" class="img-fluid max-img" >
+        <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/public/Images/inverter.png?raw=true" class="img-fluid max-img" >
       </div>
 
       <div class="col">
 
         <!--I need to write a function that checks if it's charging or discharging, then use green or red-->
-        <progress class="pb4" max="1200" value="<%= batteryCurrent %>" style="background-color: pink;"></progress>
+        <progress class="pb4" max="1200" value="<%= batteryCurrent %>" ></progress>
 
         <p><%= batteryCurrent %>A</p> 
         <p>Battery <%= batterySOC %>%<p>
 
-          <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/Images/battery.png?raw=true" class="img-fluid max-img" >
+          <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/public/Images/battery.png?raw=true" class="img-fluid max-img" >
             
       </div>
     </div>
