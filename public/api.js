@@ -41,8 +41,8 @@ function transformResponse(response){
     // values[5].innerHTML = `${data[57].state} W` No eletrcicity used
     solarGeneration: data[29].state,
     totalSolarGeneration: data[70].state,
-    peakSolar: data[13].state,
-    peakLoad: data[14].state,
+    peakSolar: Math.trunc(data[13].state),
+    peakLoad: Math.trunc(data[14].state),
     batteryCurrent: data[179].state,
     batteryVolts: data[178].state,
     batteryEnergy: data[184].state,
