@@ -12,11 +12,27 @@
     crossorigin="anonymous">
 
     <style>
-       [class*="col"] {
-        padding: 1rem;
-        background-color: #6dc5e5;
-        border: 2px solid #fff;
-        color: #fff;
+
+      body {
+        background-color: #f8f9fa; /* Light gray background */
+        font-family: Arial, sans-serif; /* Choose a readable font */
+        color: #333; /* Dark gray text color */
+        }
+
+
+        .row {
+            justify-content: center; /* Center align the content */
+        }
+
+      
+
+       .col {
+        padding: 20px;
+        background-color: #fff;
+        color: #333;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
     
       } 
 
@@ -28,38 +44,23 @@
       @media screen and (max-width: 768px) {
         .App_layout {
           display: block;
-          gap: 1rem;
+          padding: 10px;
         }
       }
-
-      /* .pb1 {
-        background-color: #ff0000; Red color
-       /* } */
-/* 
-      .pb2 {
-        background-color: #00ff00; /* Green color */
-        /* } */ 
-
-      /* .pb3 {
-        background-color: #0000ff; /* Blue color */
-       /* } */ 
-
-      /* .pb4 { */
-        /* ?background-color: #ffff00; Yellow color */
-       /* } */ 
-
       
     </style>
 
 </head>
 
-<div class="container-md border mt-5">
+<div class="container-md border  mt-5">
     <div class="row text-center App_layout">
       <div class="col">
 
         <!--I need to write a function that divides the valuenow by the valuemax, then multiples by 100 to get the percentage -->
         <!--Then this is now fed to the width for all progress bar-->
-        <progress class="pb1" max="1200" value="0"></progress>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1400"></div>
+      </div>
 
        <p class="value">0 W</p>
        <p>Grid</p>
@@ -67,7 +68,9 @@
       </div>
 
       <div class="col">
-        <progress class="pb2" max="1400" value="<%= solarPV %>"></progress>
+        <div class="progress">
+          <div class="progress-bar bg-warning" role="progressbar" style="width: <%= solarWidth %>%" aria-valuenow="<%= solarPV %>" aria-valuemin="0" aria-valuemax="1400"></div>
+      </div>
 
         <p> <%= solarPV %>W </p>
         <p>Solar PV</p>
@@ -78,7 +81,9 @@
       </div>
 
       <div class="col">
-        <progress class="pb3" max="3000" value="<%= inverterLoad %>"></progress>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: <%= loadWidth %>%" aria-valuenow="<%= inverterLoad %>" aria-valuemin="0" aria-valuemax="1400"></div>
+      </div>
         <p> <%= inverterLoad %>W </p>
           <p> Load <%= inverterLoadPercentage %>% </p>
         <img src="https://github.com/LifeofDan-EL/HA-Energy-Website/blob/main/public/Images/inverter.png?raw=true" class="img-fluid max-img" >
@@ -87,7 +92,9 @@
       <div class="col">
 
         <!--I need to write a function that checks if it's charging or discharging, then use green or red-->
-        <progress class="pb4" max="1200" value="<%= batteryPower %>" ></progress>
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" style="width: <%= batteryWidth %>%" aria-valuenow="<%= batteryPower %>" aria-valuemin="0" aria-valuemax="1400"></div>
+      </div>
 
         <p><%= batteryPower %>W</p> 
         <p>Battery <%= batterySOC %>%<p>
@@ -145,7 +152,7 @@
       </div>
       <div class="col"> 
         <p>Battery Discharge </p>
-        <p><%= batteryDischarge %>kWh</p>
+        <p>-<%= batteryDischarge %>kWh</p>
     </div>
 
     <div class="col">
@@ -158,8 +165,8 @@
 </div>
 
 
-<div class="container-md border mt-5 "> 
-    <p> My current setup is 2.2kW Solar, 24v 3kW inverter, 4kWh Lithium Battery</p>
+<div class="container-md mt-5"> 
+    <p> My current setup is 2.2kW Solar, 24v 3kW inverter, 4kWh Lithium Battery. Check out more details of my setup at <a href="https://pvoutput.org/list.jsp?userid=115071">PVOutput</a>.</p>
 </div>
 
 

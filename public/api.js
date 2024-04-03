@@ -32,11 +32,18 @@ async function fetchdata(){
 function transformResponse(response){
     const data = response.data
     return {
-          // values[1].innerHTML = `${data[57].state}W` No grid yet
+    // values[1].innerHTML = `${data[57].state}W` No grid yet
     solarPV : data[57].state,
     inverterLoad : data[55].state,
     batteryPower: data[181].state,
     batterySOC: data[180].state,
+
+    //Progress bar calculations
+    //gridWidth: Math.trunc((data[57].state/1400)*100), no grid yet
+    solarWidth: Math.trunc((data[57].state/1400)*100),
+    loadWidth: Math.trunc((data[55].state/3000)*100),
+    batteryWidth:Math.trunc((data[181].state/1400)*100),
+
 
     // values[5].innerHTML = `${data[57].state} W` No eletrcicity used
     solarGeneration: data[29].state,
@@ -48,7 +55,9 @@ function transformResponse(response){
     batteryEnergy: data[184].state,
     batteryDischarge: data[32].state,
     batteryCharge:  data[33].state,
-    inverterLoadPercentage: ((data[55].state / 3000) * 100).toFixed(1)
+    inverterLoadPercentage: ((data[55].state / 3000) * 100).toFixed(1),
+
+   
 
     }
 }
