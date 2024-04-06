@@ -93,7 +93,7 @@
 
         <!--I need to write a function that checks if it's charging or discharging, then use green or red-->
         <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: <%= batteryWidth %>%" aria-valuenow="<%= batteryPower %>" aria-valuemin="0" aria-valuemax="1400"></div>
+          <div class="progress-bar bg-success" role="progressbar" style="width: <%= batteryWidth %>%" aria-valuenow="<%= batterySOC %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
 
         <p><%= batteryPower %>W</p> 
