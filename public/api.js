@@ -8,15 +8,15 @@ const apiToken = process.env.API_TOKEN;
 const entityIdsToFilter = [
     'sensor.esphome_web_a2e2e8_pv_power',
     'sensor.esphome_web_a2e2e8_current_load_power',
-    'sensor.battery1_power',
-    'sensor.battery1_soc',
+    'sensor.battery_power',
+    'sensor.battery_soc',
     'sensor.pv_generation_daily',
     'sensor.esphome_web_a2e2e8_accumulated_solar_generation',
     'sensor.peak_solar',
     'sensor.peak_load',
-    'sensor.battery1_current',
-    'sensor.battery1_voltage',
-    'sensor.battery1_charge',
+    'sensor.battery_current',
+    'sensor.battery_voltage',
+    'sensor.battery_charge',
     'sensor.battery_discharge',
     'sensor.battery_charge_2'
 ];
@@ -65,22 +65,22 @@ function transformResponse(response){
     // First row data
     solarPV : data['sensor.esphome_web_a2e2e8_pv_power'].state,
     inverterLoad : data['sensor.esphome_web_a2e2e8_current_load_power'].state,
-    batteryPower: data['sensor.battery1_power'].state,
-    batterySOC: data['sensor.battery1_soc'].state,
+    batteryPower: data['sensor.battery_power'].state,
+    batterySOC: data['sensor.battery_soc'].state,
 
     //Progress bar calculations
     solarWidth: Math.trunc((data['sensor.esphome_web_a2e2e8_pv_power'].state/1400)*100),
     loadWidth: Math.trunc((data['sensor.esphome_web_a2e2e8_current_load_power'].state/3000)*100),
-    batteryWidth: data['sensor.battery1_soc'].state,
+    batteryWidth: data['sensor.battery_soc'].state,
 
     //Second table value
     solarGeneration: data['sensor.pv_generation_daily'].state,
     totalSolarGeneration: data['sensor.esphome_web_a2e2e8_accumulated_solar_generation'].state,
     peakSolar: Math.trunc(data['sensor.peak_solar'].state),
     peakLoad: Math.trunc(data['sensor.peak_load'].state),
-    batteryCurrent: data['sensor.battery1_current'].state,
-    batteryVolts: data['sensor.battery1_voltage'].state,
-    batteryEnergy: data['sensor.battery1_charge'].state,
+    batteryCurrent: data['sensor.battery_current'].state,
+    batteryVolts: data['sensor.battery_voltage'].state,
+    batteryEnergy: data['sensor.battery_charge'].state,
     batteryDischarge: roundToTwoDecimalPlaces(data['sensor.battery_discharge'].state),
     batteryCharge:  roundToTwoDecimalPlaces(data['sensor.battery_charge_2'].state),
     inverterLoadPercentage: ((data['sensor.esphome_web_a2e2e8_current_load_power'].state / 3000) * 100).toFixed(1),
