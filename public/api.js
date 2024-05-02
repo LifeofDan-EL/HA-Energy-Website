@@ -18,7 +18,8 @@ const entityIdsToFilter = [
     'sensor.battery_voltage',
     'sensor.battery_charge',
     'sensor.battery_discharge',
-    'sensor.battery_charge_2'
+    'sensor.battery_charge_2',
+    'sensor.inverter_load_percentage'
 ];
 
 const responseData = {}
@@ -83,7 +84,7 @@ function transformResponse(response){
     batteryEnergy: data['sensor.battery_charge'].state,
     batteryDischarge: roundToTwoDecimalPlaces(data['sensor.battery_discharge'].state),
     batteryCharge:  roundToTwoDecimalPlaces(data['sensor.battery_charge_2'].state),
-    inverterLoadPercentage: ((data['sensor.esphome_web_a2e2e8_current_load_power'].state / 3000) * 100).toFixed(1),
+    inverterLoadPercentage: data['sensor.inverter_load_percentage'].state,
     }
 }
 
