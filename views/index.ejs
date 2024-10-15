@@ -59,7 +59,7 @@
         <!--I need to write a function that divides the valuenow by the valuemax, then multiples by 100 to get the percentage -->
         <!--Then this is now fed to the width for all progress bar-->
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1400"></div>
+          <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4000"></div>
       </div>
 
        <p class="value">0 W</p>
@@ -69,7 +69,7 @@
 
       <div class="col">
         <div class="progress">
-          <div class="progress-bar bg-warning" role="progressbar" style="width: <%= solarWidth %>%" aria-valuenow="<%= solarPV %>" aria-valuemin="0" aria-valuemax="1400"></div>
+          <div class="progress-bar bg-warning" role="progressbar" style="width: <%= solarWidth %>%" aria-valuenow="<%= solarPV %>" aria-valuemin="0" aria-valuemax="6800"></div>
       </div>
 
         <p> <%= solarPV %>W </p>
@@ -82,7 +82,7 @@
 
       <div class="col">
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: <%= loadWidth %>%" aria-valuenow="<%= inverterLoad %>" aria-valuemin="0" aria-valuemax="1400"></div>
+          <div class="progress-bar" role="progressbar" style="width: <%= loadWidth %>%" aria-valuenow="<%= inverterLoad %>" aria-valuemin="0" aria-valuemax="6000"></div>
       </div>
         <p> <%= inverterLoad %>W </p>
           <p> Load <%= inverterLoadPercentage %>% </p>
@@ -93,8 +93,14 @@
 
         <!--I need to write a function that checks if it's charging or discharging, then use green or red-->
         <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: <%= batteryWidth %>%" aria-valuenow="<%= batterySOC %>" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
+          <div class="progress-bar bg-success" 
+               role="progressbar" 
+               style="width: <%= batterySOC %>%" 
+               aria-valuenow="<%= batterySOC %>" 
+               aria-valuemin="0" 
+               aria-valuemax="100">
+          </div>
+        </div>
 
         <p><%= batteryPower %>W</p> 
         <p>Battery <%= batterySOC %>%<p>
@@ -166,7 +172,7 @@
 
 
 <div class="container-md mt-5 text-center" > 
-    <p> My current setup is 2.2kW Solar, 24v 3kW inverter, 4kWh Lithium Battery. Check out more details of my setup at <a href="https://pvoutput.org/list.jsp?userid=115071" target="_blank">PVOutput</a>.</p>
+    <p> My current setup is 6.86kW Solar, 48v 6kW inverter, 28.6kWh Lithium Battery. My previous setup used to be 2.2kW Solar, 24v 3kW inverter, 4kWh Lithium Battery but I did an upgrade on 29th, August 2024. Check out the monitoring data from my setup at <a href="https://pvoutput.org/list.jsp?userid=115071" target="_blank">PVOutput</a>.</p>
 </div>
 
 

@@ -1,101 +1,122 @@
-require('dotenv').config();
-const axios = require('axios');
+require("dotenv").config();
+const axios = require("axios");
 
 const apiUrl = process.env.API_URL;
 const apiToken = process.env.API_TOKEN;
 
-  // Specify the entity_ids you want to filter
+// Specify the entity_ids you want to filter
 const entityIdsToFilter = [
-    'sensor.esphome_web_a2e2e8_pv_power',
-    'sensor.esphome_web_a2e2e8_current_load_power',
-    'sensor.battery_power',
-    'sensor.battery_soc',
-    'sensor.pv_generation_daily',
-    'sensor.esphome_web_a2e2e8_accumulated_solar_generation',
-    'sensor.peak_solar',
-    'sensor.peak_load',
-    'sensor.battery_current',
-    'sensor.battery_voltage',
-    'sensor.battery_charge',
-    'sensor.battery_discharge',
-    'sensor.battery_charge_2',
-    'sensor.inverter_load_percentage'
+  "sensor.total_pv",
+  "sensor.growatt_inverter_load_consumption",
+  "sensor.jk_bms_bms1_power",
+  "sensor.total_battery_soc",
+  "sensor.growatt_inverter_solar_output_today",
+  "sensor.growatt_inverter_lifetime_solar_output",
+  "sensor.peak_solar",
+  "sensor.peak_load",
+  "sensor.jk_bms_bms1_current",
+  "sensor.jk_bms_bms1_total_voltage",
+  "sensor.jk_bms_bms1_capacity_remaining",
+  "sensor.battery2_discharge_daily",
+  "sensor.battery2_charge_daily",
+  "sensor.growatt_inverter_load_percentage",
+  "sensor.jk_bms_bms1_state_of_charge",
 ];
 
-const responseData = {}
-
 async function fetchdata() {
-    try {
-        const response = await axios({
-            method: 'GET',
-            url: apiUrl,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiToken}`
-            }
-        });
+  try {
+    const response = await axios({
+      method: "GET",
+      url: apiUrl,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiToken}`,
+      },
+    });
 
-        if (response.status === 200) {
-            const data = transformResponse(response.data);
-            console.log(data)
-            for (const[key, value] of Object.entries(data)){
-                data[key] = getValueOrZero(value)
-            }
-            return data;
-        } else {
-            console.error('Unexpected response status:', response.status);
-            return null;
-        }
-    } catch (error) {
-        console.error('Axios error:', error);
-        return null;
+    if (response.status === 200) {
+      const data = transformResponse(response.data);
+      console.log("Transformed data:", data);
+      return data;
+    } else {
+      console.error("Unexpected response status:", response.status);
+      return null;
     }
+  } catch (error) {
+    console.error("Axios error:", error);
+    return null;
+  }
 }
 
-function transformResponse(response){
-        const data = {}
-        response.filter(item => {
-      return entityIdsToFilter.includes(item.entity_id)
-    }).forEach(item => {
-       data[item.entity_id] = item
-    })
-   console.log(data)
-   
+function transformResponse(response) {
+  if (!Array.isArray(response)) {
+    console.error("Unexpected response format. Expected an array.");
+    return {};
+  }
 
-    return {
+  const data = {};
+  response
+    .filter((item) => entityIdsToFilter.includes(item.entity_id))
+    .forEach((item) => {
+      data[item.entity_id] = item;
+    });
+
+  console.log("Filtered data:", data);
+
+  const getValue = (entityId) => {
+    const item = data[entityId];
+    return item && item.state ? parseFloat(item.state) : 0;
+  };
+
+  const result = {
     // First row data
-    solarPV : data['sensor.esphome_web_a2e2e8_pv_power'].state,
-    inverterLoad : data['sensor.esphome_web_a2e2e8_current_load_power'].state,
-    batteryPower: data['sensor.battery_power'].state,
-    batterySOC: data['sensor.battery_soc'].state,
+    solarPV: getValue("sensor.total_pv"),
+    inverterLoad: getValue("sensor.growatt_inverter_load_consumption"),
+    batteryPower: getValue("sensor.jk_bms_bms1_power"),
+    batterySOC: getValue("sensor.jk_bms_bms1_state_of_charge"),
 
     //Progress bar calculations
-    solarWidth: Math.trunc((data['sensor.esphome_web_a2e2e8_pv_power'].state/1400)*100),
-    loadWidth: Math.trunc((data['sensor.esphome_web_a2e2e8_current_load_power'].state/3000)*100),
-    batteryWidth: data['sensor.battery_soc'].state,
+    solarWidth: Math.trunc((getValue("sensor.total_pv") / 1400) * 100),
+    loadWidth: Math.trunc(
+      (getValue("sensor.growatt_inverter_load_consumption") / 3000) * 100
+    ),
+    batteryWidth: getValue("sensor.jk_bms_bms1_state_of_charge"),
 
     //Second table value
-    solarGeneration: data['sensor.pv_generation_daily'].state,
-    totalSolarGeneration: data['sensor.esphome_web_a2e2e8_accumulated_solar_generation'].state,
-    peakSolar: Math.trunc(data['sensor.peak_solar'].state),
-    peakLoad: Math.trunc(data['sensor.peak_load'].state),
-    batteryCurrent: data['sensor.battery_current'].state,
-    batteryVolts: data['sensor.battery_voltage'].state,
-    batteryEnergy: data['sensor.battery_charge'].state,
-    batteryDischarge: roundToTwoDecimalPlaces(data['sensor.battery_discharge'].state),
-    batteryCharge:  roundToTwoDecimalPlaces(data['sensor.battery_charge_2'].state),
-    inverterLoadPercentage: data['sensor.inverter_load_percentage'].state,
-    }
+    solarGeneration: getValue("sensor.growatt_inverter_solar_output_today"),
+    totalSolarGeneration: getValue(
+      "sensor.growatt_inverter_lifetime_solar_output"
+    ),
+    peakSolar: Math.trunc(getValue("sensor.peak_solar")),
+    peakLoad: Math.trunc(getValue("sensor.peak_load")),
+    batteryCurrent: getValue("sensor.jk_bms_bms1_current"),
+    batteryVolts: getValue("sensor.jk_bms_bms1_total_voltage"),
+    batteryEnergy: getValue("sensor.jk_bms_bms1_capacity_remaining"),
+    batteryDischarge: roundToTwoDecimalPlaces(
+      getValue("sensor.battery2_discharge_daily")
+    ),
+    batteryCharge: roundToTwoDecimalPlaces(
+      getValue("sensor.battery2_charge_daily")
+    ),
+    inverterLoadPercentage: getValue("sensor.growatt_inverter_load_percentage"),
+  };
+
+  // Apply getValueOrZero to all properties
+  for (const [key, value] of Object.entries(result)) {
+    result[key] = getValueOrZero(value);
+  }
+
+  return result;
 }
 
 function roundToTwoDecimalPlaces(value) {
-    return Math.round(value * 100) / 100;
+  return Math.round(value * 100) / 100;
 }
-//When an enity data is unavailable, it retuens a value of 0
-function getValueOrZero (value){
-    return  !isNaN(value) ? value : 0
+
+function getValueOrZero(value) {
+  return !isNaN(value) ? value : 0;
 }
 
 module.exports = {
-    fetchdata
-}
+  fetchdata,
+};
